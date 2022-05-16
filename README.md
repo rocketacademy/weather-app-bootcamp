@@ -1,6 +1,6 @@
-# Rocket Academy Coding Bootcamp: Create React App Template
+# Rocket Academy Coding Bootcamp: Weather App
 
-TODO: Add exercise name to README title, link to exercise page, update app name in `package.json`, run `npm i` to update `package-lock.json`.
+https://bc.rocketacademy.co/2-full-stack/2.e-exercises/2.e.5-weather-app
 
 ## Available Scripts
 

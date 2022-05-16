@@ -28,7 +28,7 @@ class App extends React.Component {
     event.preventDefault();
     axios
       .get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${this.state.cityInputValue}&limit=1&appid=${OPEN_WEATHER_API_KEY}`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${this.state.cityInputValue}&limit=1&appid=${OPEN_WEATHER_API_KEY}`
       )
       // City geo data is in response.data[0]
       // Arrow functions with no curly braces return value after arrow
@@ -56,7 +56,7 @@ class App extends React.Component {
     const weatherInfo = this.state.currCity ? (
       <div>
         <img
-          src={`http://openweathermap.org/img/wn/${this.state.weatherIconCode}@2x.png`}
+          src={`https://openweathermap.org/img/wn/${this.state.weatherIconCode}@2x.png`}
           alt="weather-icon"
         />
         <p>Current City: {this.state.currCity}</p>

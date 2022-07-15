@@ -45,11 +45,16 @@ const App = () => {
       )
       .then((response) => {
         const { data: weatherData } = response;
-        console.log(weatherData);
-        setCityData({ ...initialState, loading: "", currCity:cityData.cityName, currTemp: weatherData.main.temp, weatherType: weatherData.weather[0].main, weatherDesc: weatherData.weather[0].description, weatherIcon: `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`});
-        console.log(cityData.currTemp);
+        setCityData({
+          ...initialState,
+          loading: "",
+          currCity: cityData.cityName,
+          currTemp: weatherData.main.temp,
+          weatherType: weatherData.weather[0].main,
+          weatherDesc: weatherData.weather[0].description,
+          weatherIcon: `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`,
+        });
       });
-    
   };
 
   return (

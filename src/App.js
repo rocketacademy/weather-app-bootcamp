@@ -4,6 +4,7 @@ import "./App.css";
 import axios from "axios";
 
 const OPEN_WEATHER_API_KEY = "793ee5981e4746abc3c17239f25d747e";
+
 const defaultValues = {
   cityName: "",
   currentCityName: "",
@@ -34,7 +35,10 @@ class App extends React.Component {
       .get(
         `https://api.openweathermap.org/geo/1.0/direct?q=${this.state.cityName}&limit=1&appid=${OPEN_WEATHER_API_KEY}`
       )
-      .then((response) => response.data[0])
+      .then((response) => {
+        console.log(response.data[0]);
+        return response.data[0];
+      })
       .then((cityGeoData) =>
         axios.get(
           `https://api.openweathermap.org/data/2.5/weather?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&appid=${OPEN_WEATHER_API_KEY}&units=metric`
@@ -55,6 +59,22 @@ class App extends React.Component {
   };
 
   render() {
+    const weatherInfo = this.state.currentCityName ? (
+      <div>
+        <img
+          src={`https://openweathermap.org/img/wn/${this.state.weatherIconCode}@2x.png`}
+          alt="weather-icon"
+        />
+        <p>Current City: {this.state.currentCityName}</p>
+        <p>
+          Current Weather: {this.state.weatherType},{" "}
+          {this.state.weatherDescription}
+        </p>
+      </div>
+    ) : (
+      <p>Please enter a city name to get its weather data.</p>
+    );
+
     return (
       <div className="App">
         <header className="App-header">
@@ -68,20 +88,10 @@ class App extends React.Component {
                 onChange={this.handleInputChange}
               />
             </label>
-            <input type="submit" value="Submit" />
+            <br />
+            <input type="submit" value="Check Weather" />
           </form>
-          <div>
-            <h2>
-              Location: {this.state.currentCityName}
-              <br></br>
-              Weather: {this.state.weatherType}, {this.state.weatherDescription}
-              <br></br>
-              <img
-                src={`http://openweathermap.org/img/wn/${this.state.weatherIconCode}@2x.png`}
-                alt="Weather Icon"
-              />
-            </h2>
-          </div>
+          {weatherInfo}
         </header>
       </div>
     );

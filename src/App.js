@@ -25,20 +25,28 @@ class App extends React.Component {
 
   // handleSubmit (which wil make the API call for the long/lat and then therefore the weather data)
   handleSubmit = (event) => {
-    event.prevenDefault();
+    event.preventDefault();
     axios
       .get(
-        //why do you use the template literals here
+        //why do you use the template literals here (because http requests is string + you need to modify the variable)
         `http://api.openweathermap.org/geo/1.0/direct?q=${this.state.nameOfCityInput}&limit=5&appid=35daf72ff0bf5c098bc4ac9bb7f66ac5`
       )
-      .then((res) => res.data[0]) // why do you need this step if there's only one object returned
+      .then((res) => {
+        // console.log(res);
+        const cityGeoData = res.data[0];
+        return cityGeoData;
+        // return res.data[0];
+      }) //
       .then((cityGeoData) =>
         axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&appid=35daf72ff0bf5c098bc4ac9bb7f66ac5`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&appid=35daf72ff0bf5c098bc4ac9bb7f66ac5&units=metric`
         )
       )
       .then((res) => {
-        const { data: weatherData } = res; // need to look up 'data' notation
+        console.log(res);
+        const weatherData = res.data;
+        console.log(weatherData);
+        // const { data: weatherData } = res; // destructuring // const weatherData = res.data
         this.setState({
           // Reset input value after submit
           nameOfCityInput: "",
@@ -51,11 +59,21 @@ class App extends React.Component {
       });
   };
 
-  // weatherInfo (why does this need to be in the render)
+  // weatherInfo (why does this need to be in the render) because class component
   // const weatherInfo = [nameofCity] ? [condition if they typed the right thing] : [condition if they typed a non-city name]
 
+  // const weatherInfo = this.state.nameOfCity ? (
+  //       <div>
+  //         <p>Current city: {this.state.nameOfCity} </p>
+  //         <p>Current temperature: {this.state.temperature} </p>
+  //         <p>Current weather: {this.state.weatherDesc}</p>
+  //       </div>
+  //     ) : (
+  //       <p> Please enter the name of a city. </p>
+  //     ); // put in new .js file if you want the carrot notation to work
+
   render() {
-    const weatherInfo = this.state.nameOfCity ? (
+    const WeatherInfo = this.state.nameOfCity ? (
       <div>
         <p>Current city: {this.state.nameOfCity} </p>
         <p>Current temperature: {this.state.temperature} </p>
@@ -77,7 +95,7 @@ class App extends React.Component {
             />
             <input type="submit" value="Submit" />
           </form>
-          {weatherInfo}
+          {WeatherInfo}
         </header>
       </div>
     );

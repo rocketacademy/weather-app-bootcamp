@@ -51,17 +51,29 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <div>
+          <div>
+            <p>Current City: {currCity}</p>
+            <p>Current Temperature: {currTemp}</p>
+            <p>
+              Current Weather: {weatherType}, {weatherDesc}
+            </p>
+          </div>
+          <div>
+            <span>Enter a city</span>
 
-        <span> {currCity}</span>
-        <span>{currTemp}</span>
-        <span>{weatherType}</span>
-        <span>{weatherDesc}</span>
-        <form onSubmit={handleSubmit}>
-          <input type="text" value={cityInputValue} onChange={handleChange} />
-          <button type="submit" value="submit">
-            Submit
-          </button>
-        </form>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                value={cityInputValue}
+                onChange={handleChange}
+              />
+              <button type="submit" value="submit">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
       </header>
     </div>
   );

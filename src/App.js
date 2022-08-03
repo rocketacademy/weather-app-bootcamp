@@ -4,7 +4,7 @@ import "./App.css";
 import "./App.css";
 import axios from "axios";
 
-const OPEN_WEATHER_API_KEY = process.env.OPEN_WEATHER_API_KEY;
+const OPEN_WEATHER_KEY = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
 
 const App = () => {
   const [cityInputValue, setCityInputValue] = useState("");
@@ -17,18 +17,19 @@ const App = () => {
     setCityInputValue(event.target.value);
     console.log(cityInputValue);
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
       .get(
-        `https://api.openweathermap.org/geo/1.0/direct?q=${cityInputValue}&limit=1&appid=${OPEN_WEATHER_API_KEY}`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${cityInputValue}&limit=1&appid=${OPEN_WEATHER_KEY}`
       )
       // City geo data is in response.data[0]
       // Arrow functions with no curly braces return value after arrow
       .then((response) => response.data[0])
       .then((cityGeoData) =>
         axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&appid=${OPEN_WEATHER_API_KEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&appid=${OPEN_WEATHER_KEY}&units=metric`
         )
       )
       .then((response) => {

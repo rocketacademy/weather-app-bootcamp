@@ -21,15 +21,15 @@ export default function App() {
   const [forecastList, setForecastList] = useState([]);
   const [forecastStatus, setForecastStatus] = useState("");
 
-  let iconURL = "http://openweathermap.org/img/wn/" + currentIcon + ".png";
+  let iconURL = "https://openweathermap.org/img/wn/" + currentIcon + ".png";
   let apiWeatherURL =
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
     input +
     "&limit=1&appid=" +
     apiKey +
     "&units=metric";
   let apiForecastURL =
-    "http://api.openweathermap.org/data/2.5/forecast?q=" +
+    "https://api.openweathermap.org/data/2.5/forecast?q=" +
     input +
     "&limit=1&appid=" +
     apiKey +

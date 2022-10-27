@@ -53,7 +53,7 @@ const App = () => {
       )
       .then((response) => {
         const { data: forecastData } = response;
-        console.log(forecastData);
+        // console.log(forecastData);
         setDataForecast(forecastData);
       });
     setChecked(true);

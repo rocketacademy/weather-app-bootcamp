@@ -17,3 +17,16 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 95vw;
+}
+
+tr,
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+}

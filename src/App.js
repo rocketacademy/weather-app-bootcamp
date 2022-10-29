@@ -59,7 +59,7 @@ class App extends React.Component {
   };
 
   render() {
-    const userInput = this.state.userInput;
+    const { userInput } = this.state;
 
     return (
       <div className="App">

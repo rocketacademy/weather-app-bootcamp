@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-
+const OPEN_WEATHER_API_KEY = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
 
 export default class Weather extends React.Component {
   constructor(props) {

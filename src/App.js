@@ -12,7 +12,8 @@ class App extends React.Component {
       value: "", // form input state
       userInput: false,
       city: "",
-      weather: "",
+      weatherType: "",
+      weatherDesc: "",
       temperature: 0,
       iconURL: "",
     };
@@ -27,7 +28,7 @@ class App extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    if (this.state.value === "") return; // skip the rest of code if user didn't input
+    if (!this.state.value) return; // skip the rest of code if user didn't input
     axios
       .get(
         `https://api.openweathermap.org/geo/1.0/direct?q=${this.state.value}&limit=1&appid=a696bcddfdec4e5dd92f411d7d4a25d8`
@@ -42,13 +43,10 @@ class App extends React.Component {
       )
       .then((response) => {
         const { data: weatherData } = response;
-        console.log(weatherData);
         this.setState(() => ({
           city: weatherData.name,
-          weather: weatherData.weather[0].main.concat(
-            ", ",
-            weatherData.weather[0].description
-          ),
+          weatherType: weatherData.weather[0].main,
+          weatherDesc: weatherData.weather[0].description,
           temperature: weatherData.main.temp,
           iconURL: `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`,
           userInput: true,
@@ -81,16 +79,18 @@ class App extends React.Component {
               <input type="submit" value="Check Weather" />
             </div>
           </form>
-          <div>
-            {userInput && (
+
+          {userInput && (
+            <div>
               <img src={this.state.iconURL} alt={this.state.weather} />
-            )}
-            {userInput && <p>Current City: {this.state.city}</p>}
-            {userInput && (
+              <p>Current City: {this.state.city}</p>
               <p>Current Temperature: {this.state.temperature} °C</p>
-            )}
-            {userInput && <p>Current Weather: {this.state.weather}</p>}
-          </div>
+              <p>
+                Current Weather: {this.state.weatherType},{" "}
+                {this.state.weatherDesc}
+              </p>
+            </div>
+          )}
         </header>
       </div>
     );

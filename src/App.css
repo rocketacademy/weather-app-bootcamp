@@ -17,3 +17,18 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.center-div{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: #2196F3;
+  padding: 10px;
+  width: 100vw;
+}

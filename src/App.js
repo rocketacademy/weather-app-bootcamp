@@ -6,15 +6,27 @@ import axios from "axios";
 class App extends React.Component {
   constructor(props){
     super(props)
-    this.state={
-      userInput: '',
-    }
+    this.state = {
+      userInput: "",
+      currCity: "",
+      currTemp: "",
+      weatherType: "",
+      weatherDesc: "",
+      weatherIconCode: "",
+      forecast: false,
+      forecastData: [],
+    };
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleCheck = this.handleCheck.bind(this)
   }
 
   handleChange = (e) => {
     this.setState({userInput: e.target.value})
+  }
+
+  handleCheck = () => {
+    this.setState({forecast: !this.state.forecast})
   }
 
   handleSubmit = (e) => {
@@ -31,26 +43,86 @@ class App extends React.Component {
       )
       .then((response) => {
         const { data: weatherData } = response;
-        console.log(weatherData);
+        this.setState({
+          userInput: "",
+          currCity: weatherData.name,
+          currTemp: weatherData.main.temp,
+          weatherType: weatherData.weather[0].main,
+          weatherIconCode: weatherData.weather[0].icon,
+          weatherDesc: weatherData.weather[0].description,
+        });
+        if (this.state.forecast) {
+          axios
+            .get(
+              `https://api.openweathermap.org/data/2.5/forecast?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
+            )
+            .then((response) => {
+              const {data: forecastData} = response;
+              console.log(forecastData)
+              this.setState({
+                forecast: false,
+                forecastData: forecastData.list.slice(0,8)
+              })
+            });
+        }
       });
   }
 
   render() {
+    const weatherInfo = (
+      <div className="weatherInfo center-div">
+        <img
+          src={`http://openweathermap.org/img/wn/${this.state.weatherIconCode}@2x.png`}
+          alt="weatherIcon"
+        />
+        <label>Current City : {this.state.currCity}</label>
+        <label>Current Temperature : {this.state.currTemp}</label>
+        <label>Current Weather : {this.state.weatherType}, {this.state.weatherDesc}</label>
+      </div>
+    );
+    const forecast = (
+      <div className="center-div">
+        <h3>24Hrs Forecast</h3>
+        <div className="grid center-div">
+          {this.state.forecastData.map((x, i) => (
+            <div className="center-div" style={{fontSize: "12px"}}>
+              <h5>{`${i*3 + 3} hrs Later`}</h5>
+              <img
+                src={`http://openweathermap.org/img/wn/${x.weather[0].icon}@2x.png`}
+                alt="weatherIcon"
+              />
+              <label> Temperature : {x.main.temp}</label>
+              <label>
+                Weather : {x.weather[0].main},{" "}
+                {x.weather[0].description}
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>Weather App</p>
-          <form onSubmit={this.handleSubmit}>
+          <form
+            onSubmit={this.handleSubmit}
+            className="center-div"
+          >
             <label>
-              <input
-                type="text"
+              City:
+              <input type="text"
                 value={this.state.userInput}
                 onChange={this.handleChange}
-              />
+                style={{ margin: "6px" }}/>
+                <input type="checkbox" checked={this.state.forecast} onChange={this.handleCheck}/>
+                Forecast?
             </label>
-            <input type='submit' value='CLICK ME'/>
+            <input type="submit" value="CLICK ME" style={{ margin: "6px" }} />
           </form>
+          {this.state.currCity && weatherInfo}
+          {this.state.currCity && forecast}
         </header>
       </div>
     );

@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.png";
 import "./App.css";
 import axios from "axios";
+import Graph from "./Graph"
 
 class App extends React.Component {
   constructor(props){
@@ -61,7 +62,7 @@ class App extends React.Component {
               console.log(forecastData)
               this.setState({
                 forecast: false,
-                forecastData: forecastData.list.slice(0,8)
+                forecastData: forecastData.list
               })
             });
         }
@@ -85,8 +86,8 @@ class App extends React.Component {
         <h3>24Hrs Forecast</h3>
         <div className="grid center-div">
           {this.state.forecastData.map((x, i) => (
-            <div className="center-div" style={{fontSize: "12px"}}>
-              <h5>{`${i*3 + 3} hrs Later`}</h5>
+            <div className="center-div pod" style={{fontSize: "12px"}}>
+              <h5>{`${Math.floor((i*3 + 3)/24)}days and ${(i*3 + 3)%24} hrs Later`}</h5>
               <img
                 src={`http://openweathermap.org/img/wn/${x.weather[0].icon}@2x.png`}
                 alt="weatherIcon"
@@ -123,6 +124,7 @@ class App extends React.Component {
           </form>
           {this.state.currCity && weatherInfo}
           {this.state.currCity && forecast}
+          {this.state.currCity && <Graph data={this.state.forecastData}/>}
         </header>
       </div>
     );

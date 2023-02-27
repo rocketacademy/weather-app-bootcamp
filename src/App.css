@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
 }
 
@@ -14,6 +14,42 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 0.7vmin);
   color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1vmin 0;
+}
+
+input,
+.btn-light {
+  margin: 1vmin;
+}
+
+#forecast {
+  width: 500px;
+  height: 40vh;
+}
+
+#current-weather {
+  margin-bottom: 3vh;
+}
+
+.weather-data {
+  line-height: 40px;
+}
+
+.icon {
+  height: 40px;
+}
+
+@media only screen and (max-width: 500px) {
+  #forecast {
+    width: 100vw;
+  }
 }

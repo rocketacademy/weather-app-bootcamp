@@ -6,6 +6,16 @@ import axios from "axios";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const APIKey = "113f386d2f3e5ae883e2913c7e032cb5";
 
@@ -134,22 +144,11 @@ class App extends React.Component {
         let maxTemp = forecasts[i].main.temp_max;
         let minTemp = forecasts[i].main.temp_min;
         let description = forecasts[i].weather[0].description;
-        let icon = forecasts[i].weather[0].icon;
-        forecastDisplay.push(
-          <Row>
-            <Col className="icon-col">
-              <img
-                className="icon"
-                src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
-                alt="weather-icon"
-              />
-            </Col>
-            <Col className="content-col">{description}</Col>
-            <Col className="content-col">
-              {minTemp}°C to {maxTemp}°C
-            </Col>
-          </Row>
-        );
+        forecastDisplay.push({
+          name: description,
+          low: minTemp,
+          high: maxTemp,
+        });
       }
     }
 
@@ -166,7 +165,32 @@ class App extends React.Component {
           {this.state.forecastRetrieved && (
             <div id="forecast">
               <h6>Next five days' weather:</h6>
-              <Container>{forecastDisplay}</Container>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={forecastDisplay}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="low"
+                    stroke="#00bbf0"
+                    activeDot={{ r: 8 }}
+                  />
+                  <Line type="monotone" dataKey="high" stroke="#fdb44b" />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
           )}
         </header>

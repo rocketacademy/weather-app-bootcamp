@@ -3,17 +3,55 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 30vmin;
   pointer-events: none;
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 150vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 0.7vmin);
   color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1vmin 0;
+}
+
+input,
+.btn-light {
+  margin: 1vmin;
+}
+
+#current-weather,
+#forecast {
+  min-width: 50vw;
+}
+
+.container {
+  min-width: 350px;
+}
+
+.icon-col {
+  max-width: 25px;
+}
+
+.icon {
+  max-height: 25px;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  text-indent: -30px;
 }

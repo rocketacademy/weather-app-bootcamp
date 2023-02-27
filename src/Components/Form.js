@@ -6,7 +6,6 @@ export default class WeatherForm extends React.Component {
   render() {
     return (
       <Form onSubmit={this.props.handleSubmit}>
-        <Form.Label>City</Form.Label>
         <Form.Control
           name="city"
           placeholder="Enter city, e.g. 'London'"

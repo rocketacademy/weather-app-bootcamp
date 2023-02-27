@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 30vmin;
+  height: 20vmin;
   pointer-events: none;
 }
 
@@ -31,19 +31,25 @@ input,
   margin: 1vmin;
 }
 
-.container {
-  min-width: 350px;
+#forecast {
+  width: 500px;
+  height: 40vh;
 }
 
-.icon-col {
-  max-width: 25px;
+#current-weather {
+  margin-bottom: 3vh;
+}
+
+.weather-data {
+  line-height: 40px;
 }
 
 .icon {
-  max-height: 25px;
+  height: 40px;
 }
 
-#forecast {
-  width: 98vw;
-  height: 50vh;
+@media only screen and (max-width: 500px) {
+  #forecast {
+    width: 100vw;
+  }
 }

@@ -3,9 +3,6 @@ import logo from "./logo.png";
 import "./App.css";
 import WeatherForm from "./Components/Form";
 import axios from "axios";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import {
   LineChart,
   Line,
@@ -50,7 +47,7 @@ class App extends React.Component {
   getGeoData = () => {
     return axios
       .get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${this.state.city}&limit=5&appid=${APIKey}`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${this.state.city}&limit=5&appid=${APIKey}`
       )
       .then((res) => res.data[0])
       .catch((err) => {
@@ -116,24 +113,14 @@ class App extends React.Component {
           <h4>{location}</h4>
           <h4>{new Date().toGMTString()}</h4>
           <br />
-          <div>
-            <h6>Today's weather:</h6>
-            <Container>
-              <Row>
-                <Col className="icon-col">
-                  <img
-                    className="icon"
-                    src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
-                    alt="weather-icon"
-                  />
-                </Col>
-                <Col className="content-col">{description}</Col>
-                <Col className="content-col">
-                  {minTemp}°C to {maxTemp}°C
-                </Col>
-              </Row>
-            </Container>
-            <br />
+          <h6>Today's weather:</h6>
+          <div class="weather-data">
+            <img
+              className="icon"
+              src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
+              alt="weather-icon"
+            />{" "}
+            {description}, {minTemp}°C to {maxTemp}°C
           </div>
         </div>
       );
@@ -172,8 +159,8 @@ class App extends React.Component {
                   data={forecastDisplay}
                   margin={{
                     top: 5,
-                    right: 30,
-                    left: 20,
+                    right: 20,
+                    left: 0,
                     bottom: 5,
                   }}
                 >

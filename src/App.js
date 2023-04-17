@@ -178,7 +178,7 @@ class App extends React.Component {
             {this.state.currMinTemp}°C / {this.state.currMaxTemp}°C
           </p>
         </div>
-        <div className="day-forecast-ctn">
+        <div className="day-forecast-ctn add-left-border">
           <p>{day2Day}</p>
           <img
             src={`https://openweathermap.org/img/wn/${this.state.day2Icon}@2x.png`}
@@ -193,7 +193,7 @@ class App extends React.Component {
             {this.state.day2MinTemp}°C / {this.state.day2MaxTemp}°C
           </p>
         </div>
-        <div className="day-forecast-ctn">
+        <div className="day-forecast-ctn add-left-border">
           <p>{day3Day}</p>
           <img
             src={`https://openweathermap.org/img/wn/${this.state.day3Icon}@2x.png`}
@@ -208,7 +208,7 @@ class App extends React.Component {
             {this.state.day3MinTemp}°C / {this.state.day3MaxTemp}°C
           </p>
         </div>
-        <div className="day-forecast-ctn">
+        <div className="day-forecast-ctn add-left-border">
           <p>{day4Day}</p>
           <img
             src={`https://openweathermap.org/img/wn/${this.state.day4Icon}@2x.png`}
@@ -223,7 +223,7 @@ class App extends React.Component {
             {this.state.day4MinTemp}°C / {this.state.day4MaxTemp}°C
           </p>
         </div>
-        <div className="day-forecast-ctn">
+        <div className="day-forecast-ctn add-left-border">
           <p>{day5Day}</p>
           <img
             src={`https://openweathermap.org/img/wn/${this.state.day5Icon}@2x.png`}

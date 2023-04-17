@@ -73,7 +73,7 @@ class App extends React.Component {
       });
   };
 
-  // Get forecast for next 3 days
+  // Get forecast for next 5 days
   getWeatherForecast = () => {
     this.getGeoCoords()
       .then((geoCoords) =>

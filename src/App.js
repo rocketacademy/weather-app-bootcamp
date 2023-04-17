@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.png";
 import "./App.css";
 import axios from "axios";
 import moment from "moment";
@@ -47,7 +46,7 @@ class App extends React.Component {
   getGeoCoords = () => {
     return axios
       .get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${this.state.cityInput}&limit=1&appid=${API_KEY}`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${this.state.cityInput}&limit=1&appid=${API_KEY}`
       )
       .then((response) => response.data[0]);
   };

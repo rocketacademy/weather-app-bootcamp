@@ -1,27 +1,43 @@
 import axios from "axios";
 
 const APIKEY = process.env.REACT_APP_API_KEY;
-const resultLimit = 3;
+const resultLimit = 5;
 
 export const getLatLon = (cityName) => {
     return new Promise((res, rej) => {
         res(
             axios
                 .get(
-                    `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=${3}&appid=${APIKEY}`
+                    `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=${resultLimit}&appid=${APIKEY}`
                 )
                 .then((res) => {
                     if (res.data.length === 0)
                         throw new Error("Couldn't find results");
 
-                    return {
-                        lat: res.data[0].lat,
-                        lon: res.data[0].lon,
-                        name: `${res.data[0].name}, ${res.data[0].country}`,
-                    };
-                })
-                .catch((err) => {
-                    if (err) throw new Error("Error in getLatLon");
+                    console.log(res);
+
+                    let resultList = res.data.map((item, index) => {
+                        let combinedName;
+                        if (res.data[index].state == null) {
+                            combinedName = `${res.data[index].name}, ${res.data[index].country}`;
+                        } else {
+                            combinedName = `${res.data[index].name}, ${res.data[index].state}, ${res.data[index].country}`;
+                        }
+
+                        return {
+                            lat: res.data[index].lat,
+                            lon: res.data[index].lon,
+                            name: combinedName,
+                        };
+                    });
+
+                    return resultList;
+
+                    // return {
+                    //     lat: res.data[0].lat,
+                    //     lon: res.data[0].lon,
+                    //     name: `${res.data[0].name}, ${res.data[0].country}`,
+                    // };
                 })
         );
     });
@@ -41,9 +57,6 @@ export const getWeatherData = ({ lat, lon }) => {
                         daily: response.data.daily, //array
                         hourly: response.data.hourly, // array
                     };
-                })
-                .catch((err) => {
-                    if (err) throw new Error("Error in getWeatherData");
                 })
         );
     });

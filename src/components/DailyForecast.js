@@ -79,7 +79,7 @@ class DailyForecast extends Component {
                                         {day.weather[0].main}
                                     </TableCell>
                                     <TableCell align="center">
-                                        {day.pop}
+                                        {day.pop * 100}
                                     </TableCell>
                                     <TableCell align="center">
                                         {day.temp.min}

@@ -106,78 +106,89 @@ class App extends React.Component {
   };
 
   render() {
+    let todaysDate = moment(this.state.currDate).format("MMMM Do YYYY");
+
     let day2Day = moment(this.state.day2Date).format("dddd").toUpperCase();
 
     let day3Day = moment(this.state.day3Date).format("dddd").toUpperCase();
 
+    let firstLetter = this.state.currWeatherDescription.charAt(0);
+
+    let uppercaseDescription =
+      firstLetter.toUpperCase() + this.state.currWeatherDescription.slice(1);
+
     const weatherOutput = this.state.currCity ? (
-      <div>
-        <img
-          src={`https://openweathermap.org/img/wn/${this.state.currIcon}@2x.png`}
-          alt="Current weather icon"
-        />
-        <p>City: {this.state.currCity}</p>
-        <p>Current Temperature: {this.state.currTemp}°C</p>
-        <p>Feels Like: {this.state.currFeelsLikeTemp}°C</p>
-        <p>
-          Current Weather: {this.state.currWeather},{" "}
-          {this.state.currWeatherDescription}.
-        </p>
+      <div className="weather-ctn">
+        <div className="left-ctn">
+          <p>Today's Weather</p>
+          <h1>{this.state.currCity}</h1>
+          <p>{todaysDate}</p>
+          <p>
+            {this.state.currTemp}°C | {uppercaseDescription}
+          </p>
+        </div>
+        <div className="right-ctn">
+          <img
+            src={`https://openweathermap.org/img/wn/${this.state.currIcon}@2x.png`}
+            alt="Current weather icon"
+          />
+        </div>
       </div>
-    ) : (
-      <p>Enter a city name to check its weather.</p>
-    );
+    ) : null;
 
     const forecastOutput = this.state.currCity ? (
-      <div>
-        <div>
+      <div className="forecast-ctn">
+        <div className="day-forecast-ctn">
           <p>TODAY</p>
           <img
             src={`https://openweathermap.org/img/wn/${this.state.currIcon}@2x.png`}
             alt="Today's weather icon"
           />
           <p>
-            {this.state.currMinTemp}°C/{this.state.currMaxTemp}°C
+            {this.state.currMinTemp}°C | {this.state.currMaxTemp}°C
           </p>
         </div>
-        <div>
+        <div className="day-forecast-ctn">
           <p>{day2Day}</p>
           <img
             src={`https://openweathermap.org/img/wn/${this.state.day2Icon}@2x.png`}
             alt="Tomorrow's weather icon"
           />
           <p>
-            {this.state.day2MinTemp}°C/{this.state.day2MaxTemp}°C
+            {this.state.day2MinTemp}°C | {this.state.day2MaxTemp}°C
           </p>
         </div>
-        <div>
+        <div className="day-forecast-ctn">
           <p>{day3Day}</p>
           <img
             src={`https://openweathermap.org/img/wn/${this.state.day3Icon}@2x.png`}
             alt="Day after tomorrow's weather icon"
           />
           <p>
-            {this.state.day3MinTemp}°C/{this.state.day3MaxTemp}°C
+            {this.state.day3MinTemp}°C | {this.state.day3MaxTemp}°C
           </p>
         </div>
       </div>
     ) : null;
     return (
       <div className="App">
-        <header className="App-header">
-          <form onSubmit={this.handleSubmit}>
+        <header className="header-ctn">
+          <form onSubmit={this.handleSubmit} className="form-ctn">
             <input
+              className="input-box"
               type="text"
               value={this.state.cityInput}
               placeholder="Enter a city to check the weather. E.g. Singapore"
               onChange={this.handleChange}
               required
             />
-            <input type="submit" value="Get Forecast" />
+            <input className="btn" type="submit" value="Check Weather" />
           </form>
-          <div>{weatherOutput}</div>
-          <div>{forecastOutput}</div>
         </header>
+        <main className="main-ctn">
+          {weatherOutput}
+          {forecastOutput}
+        </main>
       </div>
     );
   }

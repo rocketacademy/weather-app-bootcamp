@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_KEY = "e7c3a9e229130c477fb422e589371c9f";
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const getWeatherData = (cityName) => {
   console.log("getWeatherData is being called");

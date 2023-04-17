@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const APIKEY = "0ef8f50d14aee0ab81ad9bef14aa0d56";
+const APIKEY = process.env.REACT_APP_API_KEY;
 const resultLimit = 3;
 
 export const getLatLon = (cityName) => {
@@ -32,7 +32,7 @@ export const getWeatherData = ({ lat, lon }) => {
         res(
             axios
                 .get(
-                    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=0ef8f50d14aee0ab81ad9bef14aa0d56&units=metric`
+                    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIKEY}&units=metric`
                 )
                 .then((response) => {
                     console.log(response);

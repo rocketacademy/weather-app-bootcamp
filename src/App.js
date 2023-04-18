@@ -12,7 +12,10 @@ class App extends React.Component {
       value: "",
       cityInputValue: "",
       weatherData: "",
-      /* data:[] */
+
+
+      tempData: "",
+      description: "",
     };
   }
 
@@ -25,47 +28,33 @@ class App extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log('event')
+    console.log("event");
     axios
       .get(
         `http://api.openweathermap.org/geo/1.0/direct?q=${this.state.cityInputValue}&appid=${OPEN_WEATHER_API_KEY}`
       )
       .then((response) => {
-        console.log('another', response.data);
-        return response.data[0];
-      })
-      .then((response) => {
+        console.log(response.data);//use Chrome's dev tool on console log to check object's data
         axios
           .get(
-            `https://api.openweathermap.org/data/2.5/weather?lat=${response.lat}&lon=${response.lon}&appid=${OPEN_WEATHER_API_KEY}`
+            `https://api.openweathermap.org/data/2.5/weather?lat=${response.data[0].lat}&lon=${response.data[0].lon}&appid=${OPEN_WEATHER_API_KEY}&units=metric`
           )
-          .then((response) => {
-            console.log(response.data);
-            const weatherData = `${response.data.main.temp}  ${response.data.weather[0].description}`;
-            console.log('something', weatherData);
-            return new Promise((res, rej) => {
-              res(weatherData);
+          .then((response2) => {
+            console.log(response2.data);
+            this.setState({
+              tempData: response2.data.main.temp, //we refer to the data we need from chrome's dev tools console.log of the response2.data
+              description: response2.data.weather[0].description,
             });
           });
       })
-      .then((response) => {
-        console.log("testing", response);
-        this.setState(
-          {
-            weatherData: response,
-          },
-          () => {
-            console.log("hello");
-          }
-        );
-      })
+
       .catch((error) => {
         console.log(error);
       });
   };
 
   render() {
-    /* const mydata = this.state.weatherData */
+
 
     return (
       <div className="App">
@@ -75,18 +64,18 @@ class App extends React.Component {
             Edit <code>src/App.js</code> and save to reload.
           </p> */}
           <form onSubmit={this.handleSubmit}>
-            {/* <label>Enter city:</label> */}
-            {/* <input
+            <label>Enter city:</label>
+            <input
               type="text"
-
               onChange={this.handleChange}
               value={this.state.cityInputValue}
               placeholder="Enter city name"
-            ></input> */}
-            {/* <input type="submit"></input> */}
+            ></input>
+            <button type="submit">Submit</button>
           </form>
-          {/*   <p>{mydata}</p> */}
-          {/* {this.state.weatherData} */}
+
+          {this.state.tempData ? <p>The temperature is {this.state.tempData} degrees Celsius and the weather description is {this.state.description}
+          </p> : null}
         </header>
       </div>
     );
@@ -101,11 +90,11 @@ export default App;
 (3) Go up above render() to define/create these 2 functions, create the handleChange function first
 (4) Identify the state that we want to capture : cityInputValue from the API URL
 (5) craft out the handleSubmit function
-(6) refer to th API's document to see what parameters are required and copy the api and paste into out axios.get()
-(7) use console.log to see received data and check through the object data's various objects
-(8) decide / choose which object inside is the piece that we want (lines 30 and 33) using console.log(response.data)
-(9) code the objects we want into the API itself (depending on each API's documentation) in line 33
-(9) create a variable const to hold this piece of data that we want (line 33)
-(10) create a code to return this piece of data to the HTML for user
+(6) refer to the API's document to see what parameters are required and copy the api and paste into out axios.get()
+(7) use Chrome's console.log to see received data object and check through each data object (data's) various objects (line 37)
+(8) decide / choose which object inside is the piece that we want (lines 37 and 43) using Chrome's console.log of the object (response.data)
+(9) code the objects we want into the API itself (depending on each API's documentation) in line 40 & lines 45, 46
+(9) update the state to hold the pieces of data that we want (line 45 and 46)
+(10) go to the return div to craft out the HTML part using ternerary operator to present data captured in lines 45 and 46
 
 */

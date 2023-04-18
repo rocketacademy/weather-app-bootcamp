@@ -24,7 +24,7 @@ class App extends React.Component {
     const searchQuery = this.state.search;
     axios
       .get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${searchQuery}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${searchQuery}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
       )
       .then((response) => response.data[0])
       .then((data) =>

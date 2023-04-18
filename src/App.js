@@ -3,8 +3,6 @@ import "./App.css";
 import axios from "axios";
 // import { Data } from "./Components/Data";
 
-const WEATHER_API_KEY = "2e99e4ed50741211eeac205824756e29";
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -26,12 +24,12 @@ class App extends React.Component {
     const searchQuery = this.state.search;
     axios
       .get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${searchQuery}&appid=${WEATHER_API_KEY}`
+        `http://api.openweathermap.org/geo/1.0/direct?q=${searchQuery}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
       )
       .then((response) => response.data[0])
       .then((data) =>
         axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${data.lat}&lon=${data.lon}&appid=${WEATHER_API_KEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${data.lat}&lon=${data.lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
         )
       )
       .then((response) => {
@@ -47,7 +45,7 @@ class App extends React.Component {
           icon: weatherData.weather[0].icon,
         });
         return axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&appid=${WEATHER_API_KEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
         );
       })
       .then((response) => {

@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import axios from "axios";
-import { Data } from "./Components/Data";
+// import { Data } from "./Components/Data";
 
 const WEATHER_API_KEY = "2e99e4ed50741211eeac205824756e29";
 
@@ -17,7 +17,6 @@ class App extends React.Component {
       feels_like: 0,
       weather: "",
       icon: "",
-      coord: {},
       forecast: "",
     };
   }
@@ -46,7 +45,6 @@ class App extends React.Component {
           feels_like: weatherData.main.feels_like,
           weather: weatherData.weather[0].description,
           icon: weatherData.weather[0].icon,
-          coord: weatherData.coord,
         });
         return axios.get(
           `https://api.openweathermap.org/data/2.5/forecast?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&appid=${WEATHER_API_KEY}&units=metric`
@@ -74,7 +72,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { showResults, temp, humidity, feels_like, weather, name, icon } =
+    const { showResults, temp, humidity, feels_like, weather, name } =
       this.state;
 
     let result;

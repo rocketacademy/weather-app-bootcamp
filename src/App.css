@@ -1,19 +1,71 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
+  background-color: black;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  color: grey;
+  text-align: center;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+
+.weather-header {
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.weather-body {
+  border: 10px solid rgb(244, 217, 226);
+  padding: 20px;
+  margin: 15px 60px;
+  border-radius: 40px;
+  background-color: lightblue;
+  min-height: 30vh;
+  min-width: 30vh;
+  display: block;
+}
+
+.weather-footer {
+  background-color: rgba(128, 128, 128, 0.507);
+  text-align: center;
+  color: rgb(244, 217, 226);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px;
+}
+
+.weather-footer a {
+  color: burlywood;
+}
+
+button {
+  display: block;
+  background: burlywood;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 10px;
+  transition: all 200ms ease;
+  box-shadow: rgba(70, 75, 205, 0.08) 0px 8px 8px 0;
+}
+
+button:hover {
+  background: rgb(244, 217, 226);
+}
+
+.App form input[type="text"] {
+  text-align: center;
+  border: none;
+  padding: 2vw;
+}
+
+.App form input[type="submit"] {
+  display: block;
+  background: burlywood;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 10px;
 }

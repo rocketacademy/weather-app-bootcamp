@@ -7,15 +7,13 @@ function toProperCase(str) {
   });
 }
 
-// caleb's 0fd25ad9fe1e3a817f64f6efd23b44bd
-
 const WeatherData = ({ city }) => {
   const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
     if (!city) return;
 
-    let OPEN_WEATHER = "2240915fd7a6400344cc51f324c59a26";
+    let OPEN_WEATHER = "0fd25ad9fe1e3a817f64f6efd23b44bd";
     axios
       .get(
         `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${OPEN_WEATHER}`

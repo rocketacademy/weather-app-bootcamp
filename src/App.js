@@ -1,20 +1,24 @@
-import React from "react";
-import logo from "./logo.png";
+import React, { useState } from "react";
 import "./App.css";
+import Form from "./Component/Form";
+import WeatherData from "./Component/WeatherData";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-        </header>
-      </div>
-    );
-  }
-}
+const App = () => {
+  const [city, setCity] = useState("");
+
+  const handleFormSubmit = (city) => {
+    setCity(city);
+  };
+
+  return (
+    <div className="app">
+      {/* <h1>Caleb's Weather App</h1> */}
+      <br />
+      <WeatherData city={city} />
+      <br />
+      <Form onSubmit={handleFormSubmit} />
+    </div>
+  );
+};
 
 export default App;

@@ -35,18 +35,16 @@ class App extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const APIKEY = "2c574016c12d18b72f4f2c9c08d9fcc1";
-
     let CityInput = this.state.CityInput;
 
     axios
       .get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${CityInput}&limit=1&&appid=${APIKEY}`
+        `http://api.openweathermap.org/geo/1.0/direct?q=${CityInput}&limit=1&&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
       )
       .then((response) => response.data[0])
       .then((cityGeoData) =>
         axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&appid=${APIKEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
         )
       )
       .then((response) => {
@@ -61,12 +59,12 @@ class App extends React.Component {
 
     axios
       .get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${CityInput}&limit=1&&appid=${APIKEY}`
+        `http://api.openweathermap.org/geo/1.0/direct?q=${CityInput}&limit=1&&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
       )
       .then((response) => response.data[0])
       .then((cityGeoData) =>
         axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&appid=${APIKEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
         )
       )
       .then((response) => {

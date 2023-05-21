@@ -39,7 +39,7 @@ class App extends React.Component {
 
     axios
       .get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${CityInput}&limit=1&&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${CityInput}&limit=1&&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
       )
       .then((response) => response.data[0])
       .then((cityGeoData) =>
@@ -59,7 +59,7 @@ class App extends React.Component {
 
     axios
       .get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${CityInput}&limit=1&&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${CityInput}&limit=1&&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
       )
       .then((response) => response.data[0])
       .then((cityGeoData) =>

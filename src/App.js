@@ -93,7 +93,7 @@ class App extends React.Component {
           {cityName ? (
             <div>
               <div>
-                The weather at {cityName}, {country} at:
+                The weather forecast at {cityName}, {country} at:
               </div>
               <ul>
                 <li>

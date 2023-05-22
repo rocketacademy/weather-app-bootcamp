@@ -1,14 +1,22 @@
-.App {
+/* .App {
   text-align: center;
+} */
+
+html,
+body {
+  background-color: #333333;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App {
+  background-color: #204b55;
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 .App-header {
-  background-color: #282c34;
+  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,4 +24,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+.weather-logo {
+  height: 15vmin;
+  pointer-events: none;
+  text-align: center;
 }

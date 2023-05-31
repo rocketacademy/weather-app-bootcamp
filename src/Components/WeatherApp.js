@@ -88,7 +88,7 @@ export default class WeatherApp extends React.Component {
           </thead>
           <tbody>
             {forecast.map((hourlyForecast) => (
-              <tr>
+              <tr key={hourlyForecast.dt_txt}>
                 <td>{hourlyForecast.dt_txt}</td>
                 <td>{hourlyForecast.main.temp}°C </td>
                 <td> {hourlyForecast.weather[0].main}</td>

@@ -29,7 +29,7 @@ export default class WeatherApp extends React.Component {
 
     axios
       .get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${
+        `https://api.openweathermap.org/geo/1.0/direct?q=${
           this.state.input
         }&limit=${1}&appid=${APIKey}`
       )
@@ -113,7 +113,7 @@ export default class WeatherApp extends React.Component {
             type="text"
             name="input"
             value={input}
-            placeholder="Enter a input name"
+            placeholder="Enter a city name"
             onChange={this.handleChange}
           />
           <button>Check weather</button>

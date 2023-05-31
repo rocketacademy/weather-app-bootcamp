@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-const APIKey = "4f9a82ac7e88dfa268609326f66cc2f7";
+import { Table } from "react-bootstrap";
+const APIKey = process.env.REACT_APP_API_KEY;
 
 export default class WeatherApp extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class WeatherApp extends React.Component {
       weather: "",
       weatherDescription: "",
       weatherIcon: "",
+      forecast: [],
     };
   }
 
@@ -32,26 +34,35 @@ export default class WeatherApp extends React.Component {
         }&limit=${1}&appid=${APIKey}`
       )
 
-      .then((data) =>
-        axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${data.data[0].lat}&lon=${data.data[0].lon}&units=metric&appid=${APIKey}`
-        )
-      )
+      .then((geoData) => {
+        const currentWeatherData = axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${geoData.data[0].lat}&lon=${geoData.data[0].lon}&units=metric&appid=${APIKey}`
+        );
+        const forecastWeatherData = axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${geoData.data[0].lat}&lon=${geoData.data[0].lon}&units=metric&appid=${APIKey}`
+        );
+        return Promise.all([currentWeatherData, forecastWeatherData]);
+      })
 
-      .then((data) => {
-        const { data: weatherData } = data; // data.data is assigned to weatherData var using destructring
-        console.log(weatherData);
+      .then(([currentWeatherData, forecastWeatherData]) => {
+        const { data: currentWeather } = currentWeatherData; // currentWeatherData.data is assigned to currentWeather var using destructring
+        console.log(currentWeather);
 
         this.setState({
           input: "",
-          city: weatherData.name,
-          temperature: weatherData.main.temp,
-          weather: weatherData.weather[0].main,
-          weatherDescription: weatherData.weather[0].description,
-          weatherIcon: weatherData.weather[0].icon,
+          city: currentWeather.name,
+          temperature: currentWeather.main.temp,
+          weather: currentWeather.weather[0].main,
+          weatherDescription: currentWeather.weather[0].description,
+          weatherIcon: currentWeather.weather[0].icon,
+          forecast: [...forecastWeatherData.data.list],
         });
       });
   };
+
+  componentDidUpdate() {
+    console.log(this.state.forecast);
+  }
 
   render() {
     const {
@@ -61,7 +72,39 @@ export default class WeatherApp extends React.Component {
       weather,
       weatherDescription,
       weatherIcon,
+      forecast,
     } = this.state;
+
+    const forecastTable = forecast && forecast.length > 0 && (
+      <>
+        <h2>5-day 3-hourly forecast</h2>
+        <Table variant="dark">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Temperature</th>
+              <th colSpan={3}>Weather</th>
+            </tr>
+          </thead>
+          <tbody>
+            {forecast.map((hourlyForecast) => (
+              <tr>
+                <td>{hourlyForecast.dt_txt}</td>
+                <td>{hourlyForecast.main.temp}°C </td>
+                <td> {hourlyForecast.weather[0].main}</td>
+                <td>{hourlyForecast.weather[0].description}</td>
+                <td>
+                  <img
+                    src={`https://openweathermap.org/img/wn/${hourlyForecast.weather[0].icon}@2x.png`}
+                    alt="weather"
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </>
+    );
 
     return (
       <div>
@@ -74,21 +117,24 @@ export default class WeatherApp extends React.Component {
             onChange={this.handleChange}
           />
           <button>Check weather</button>
-          <br />
-          {weatherIcon !== "" && (
-            <img
-              src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
-              alt="weather"
-            />
-          )}
-          {city !== "" && <h2>City: {city}</h2>}
-          {temperature !== "" && <h2>Temperature: {temperature}°C</h2>}
-          {weather !== "" && weatherDescription !== "" && (
-            <h2>
-              Weather: {weather}, {weatherDescription}
-            </h2>
-          )}
         </form>
+
+        {weatherIcon !== "" && (
+          <img
+            src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
+            alt="weather"
+          />
+        )}
+        {city !== "" && <h2>City: {city}</h2>}
+        {temperature !== "" && <h2>Current Temperature: {temperature}°C</h2>}
+        {weather !== "" && weatherDescription !== "" && (
+          <h2>
+            Current Weather: {weather}, {weatherDescription}
+          </h2>
+        )}
+
+        <br />
+        {forecastTable}
       </div>
     );
   }

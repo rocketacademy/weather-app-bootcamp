@@ -1,13 +1,21 @@
 {
   "name": "weather-app-bootcamp",
   "version": "0.1.0",
+  "homepage": "https://ryanlerler.github.io/weather-app-bootcamp",
   "private": true,
   "dependencies": {
+    "axios": "^1.4.0",
+    "bootstrap": "^5.3.0",
+    "gh-pages": "^5.0.0",
     "react": "^18.1.0",
+    "react-bootstrap": "^2.7.4",
     "react-dom": "^18.1.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "recharts": "^2.6.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build"
   },

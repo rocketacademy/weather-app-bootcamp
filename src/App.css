@@ -17,3 +17,11 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+td {
+  padding: 1vw;
+}
+
+td  {
+  margin: 0;
+}

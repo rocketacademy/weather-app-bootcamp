@@ -31,8 +31,6 @@ function App() {
       .then((response) => {
         const { data: weatherData } = response;
 
-        console.log(weatherData);
-
         setCity(weatherData.name);
         setTemp(weatherData.main.temp);
         setWeatherMain(weatherData.weather[0].main);

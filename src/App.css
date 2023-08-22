@@ -46,3 +46,17 @@ p,
 form {
   margin: 0.5em;
 }
+
+label {
+  font-weight: bold;
+}
+
+input,
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input {
+  margin: 1.25rem;
+}

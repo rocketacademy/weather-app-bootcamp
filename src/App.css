@@ -1,5 +1,30 @@
 .App {
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  z-index: -1;
+}
+
+.grid-item {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.grid-item:nth-child(even) {
+  transform: translateY(calc(50% + 8px));
 }
 
 .App-logo {
@@ -8,12 +33,35 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+}
+
+#App-container {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+h1,
+h2,
+p,
+form {
+  margin: 1.5rem;
+}
+
+label {
+  font-weight: bold;
+}
+
+input,
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input {
+  margin: 1.5rem;
 }

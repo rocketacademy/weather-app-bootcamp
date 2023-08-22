@@ -104,30 +104,32 @@ function App() {
         ))}
       </div>
       <header className="App-header">
-        <form onSubmit={handleSubmit}>
-          <label>
-            Enter city name:
+        <div id="App-container">
+          <form onSubmit={handleSubmit}>
+            <label>
+              Enter city name:
+              <br />
+              <input
+                type="text"
+                value={inputCity}
+                onChange={handleInputChange}
+                placeholder="City name"
+              />
+            </label>
             <br />
-            <input
-              type="text"
-              value={inputCity}
-              onChange={handleInputChange}
-              placeholder="City name"
-            />
-          </label>
-          <br />
-          <button type="submit">Check Weather</button>
-        </form>
+            <button type="submit">Check Weather</button>
+          </form>
 
-        {city && (
-          <>
-            <p>
-              Weather in {city}: {weatherMain}
-            </p>
-            <p>Details: {weatherDesc}</p>
-            <p>Temperature: {temp} &deg;C</p>
-          </>
-        )}
+          {city && (
+            <>
+              <p>
+                Weather in {city}: {weatherMain}
+              </p>
+              <p>Details: {weatherDesc}</p>
+              <p>Temperature: {temp} &deg;C</p>
+            </>
+          )}
+        </div>
       </header>
     </div>
   );

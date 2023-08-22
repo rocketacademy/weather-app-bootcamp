@@ -65,7 +65,7 @@ function App() {
       const columnIndex = index % cellsPerRow;
 
       if (columnIndex % 2 === 1) {
-        item.style.transform = "translateY(calc(50% + 8px))";
+        item.style.transform = "translateY(calc(50%))";
       } else {
         item.style.transform = "translateY(0)";
       }

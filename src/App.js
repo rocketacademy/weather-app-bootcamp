@@ -70,9 +70,9 @@ const App = () => {
 		}
 	}, [fiveDayWeather, setFiveDayTemps]);
 
-	useEffect(() => {
-		console.log(fiveDayTemps);
-	}, [fiveDayTemps]);
+	// useEffect(() => {
+	// 	console.log(fiveDayTemps);
+	// }, [fiveDayTemps]);
 
 	return (
 		<div className='App'>
@@ -93,9 +93,11 @@ const App = () => {
 			)}
 			<header className='App-header'>
 				<div className='weather-info'>
+					{loaded && <h1 className='item1'>{weather.name}</h1>}
 					{loaded && <DisplayInfo displayInfo={displayInfo} />}
 					{loaded && <TempLineChart fiveDayTemps={fiveDayTemps} />}
 					<Input
+						className='item3'
 						city={city}
 						setCity={setCity}
 						setWeather={setWeather}

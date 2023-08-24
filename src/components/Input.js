@@ -40,7 +40,7 @@ export const Input = ({ city, setCity, setWeather, setFiveDayWeather }) => {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className='item4'>
 				<label></label> Enter your city
 				<input
 					value={city}

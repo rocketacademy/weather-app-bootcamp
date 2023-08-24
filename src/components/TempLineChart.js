@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import {
 	LineChart,
 	Line,
@@ -19,40 +20,43 @@ export const TempLineChart = ({ fiveDayTemps }) => {
 
 	// Extract the required data for the chart
 	const tempData = day1Data.map((entry) => ({
-		time: entry.dt, // Assuming 'time' represents the time of the day
+		time: moment.unix(entry.dt).format('dddd DD/MM/YYYY'), // Assuming 'time' represents the time of the day
 		temp: entry.temp.temp,
 		minTemp: entry.temp.temp_min,
 		maxTemp: entry.temp.temp_max,
 	}));
 
 	return (
-		<ResponsiveContainer width='100%' height={300}>
-			<LineChart data={tempData}>
-				<CartesianGrid strokeDasharray='3 3' />
-				<XAxis dataKey='time' />
-				<YAxis />
-				<Tooltip />
-				<Legend />
-				<Line
-					type='monotone'
-					dataKey='temp'
-					stroke='#8884d8'
-					name='Temperature'
-				/>
-				<Line
-					type='monotone'
-					dataKey='minTemp'
-					stroke='#82ca9d'
-					name='Min Temperature'
-				/>
-				<Line
-					type='monotone'
-					dataKey='maxTemp'
-					stroke='#ff0000'
-					name='Max Temperature'
-				/>
-			</LineChart>
-		</ResponsiveContainer>
+		<div>
+			<h4 className='tomorrows-temp'>Tomorrow's temperature</h4>
+			<ResponsiveContainer width='100%' height={300} className='item3'>
+				<LineChart data={tempData} style={{ background: 'lightpurple' }}>
+					<CartesianGrid strokeDasharray='3 3' />
+					<XAxis dataKey='time' tick={{ fill: 'white' }} />
+					<YAxis tick={{ fill: 'white' }} />
+					<Tooltip />
+					<Legend />
+					<Line
+						type='monotone'
+						dataKey='temp'
+						stroke='orange'
+						name='Temperature'
+					/>
+					<Line
+						type='monotone'
+						dataKey='minTemp'
+						stroke='#82ca9d'
+						name='Min Temperature'
+					/>
+					<Line
+						type='monotone'
+						dataKey='maxTemp'
+						stroke='#ff0000'
+						name='Max Temperature'
+					/>
+				</LineChart>
+			</ResponsiveContainer>
+		</div>
 	);
 };
 

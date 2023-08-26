@@ -85,7 +85,7 @@ const App = () => {
           className="background-video"
         >
           <source
-            src={`../public/videos/${displayInfo.weather_video}`}
+            src={`${process.env.PUBLIC_URL}/weather-app-bootcamp/videos/${displayInfo.weather_video}`}
             type="video/mp4"
           />
           {/* Add additional source tags for other supported video formats */}

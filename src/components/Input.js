@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const Input = ({ city, setCity, setWeather, setFiveDayWeather }) => {
   const key = 'affe432d2fa46aa11c96860a17ff801b';
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${key}`;
+  const url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${key}`;
 
   const handleSubmit = (e) => {
     e.preventDefault();

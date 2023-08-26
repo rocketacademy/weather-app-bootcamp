@@ -1,12 +1,14 @@
 {
   "name": "weather-app-bootcamp",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "https://zach7815.github.io/weather-app-bootcamp/",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.6",
     "axios": "^1.4.0",
+    "gh-pages": "^6.0.0",
     "memfs": "^4.2.1",
     "moment": "^2.29.4",
     "react": "^18.1.0",
@@ -15,6 +17,8 @@
     "recharts": "^2.7.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages  -d build",
     "start": "react-scripts start",
     "build": "react-scripts build"
   },

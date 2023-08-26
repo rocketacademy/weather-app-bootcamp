@@ -85,7 +85,7 @@ const App = () => {
           className="background-video"
         >
           <source
-            src={`/videos/${displayInfo.weather_video}`}
+            src={`../public/videos/${displayInfo.weather_video}`}
             type="video/mp4"
           />
           {/* Add additional source tags for other supported video formats */}
@@ -96,7 +96,6 @@ const App = () => {
           {loaded && <h1 className="item1">{weather.name}</h1>}
           {loaded && <DisplayInfo displayInfo={displayInfo} />}
           {loaded && <BasicTabs fiveDayData={fiveDayTemps} />}
-          {/* {loaded && <TempLineChart fiveDayTemps={fiveDayTemps} />} */}
           <Input
             className="item3"
             city={city}

@@ -1,5 +1,6 @@
 {
   "name": "weather-app-bootcamp",
+  "homepage": "https://jewc.github.io/weather-app-bootcamp/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

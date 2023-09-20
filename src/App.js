@@ -12,8 +12,6 @@ class App extends React.Component {
       value: "",
       cityInputValue: "",
       weatherData: "",
-
-
       tempData: "",
       description: "",
     };
@@ -74,8 +72,14 @@ class App extends React.Component {
             <button type="submit">Submit</button>
           </form>
 
-          {this.state.tempData ? <p>The temperature is {this.state.tempData} degrees Celsius and the weather description is {this.state.description}
-          </p> : null}
+          {this.state.tempData ?
+            <div>
+              <p>{this.state.cityInputValue}'s temperature is {this.state.tempData} degrees Celsius.</p>
+
+              <p> The weather description is {this.state.description}.
+              </p>
+            </div>
+            : null}
         </header>
       </div>
     );

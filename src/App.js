@@ -14,6 +14,7 @@ class App extends React.Component {
       weatherData: "",
       tempData: "",
       description: "",
+      feels_like: "",
     };
   }
 
@@ -42,6 +43,7 @@ class App extends React.Component {
             this.setState({
               tempData: response2.data.main.temp, //we refer to the data we need from chrome's dev tools console.log of the response2.data
               description: response2.data.weather[0].description,
+              feels_like: response2.data.main.feels_like,
             });
           });
       })
@@ -61,7 +63,7 @@ class App extends React.Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p> */}
-          <h1>The Weather App</h1>
+          <h1 className="app-title">The Weather App</h1>
           <form onSubmit={this.handleSubmit}>
             <label>Enter city: </label>
             <input
@@ -75,8 +77,24 @@ class App extends React.Component {
           </form>
           <br />
           {this.state.tempData ?
-            <div>
-              <tr>
+            <div className="container-flex">
+              <div className="flex-item">
+                <h2>City:</h2>
+                <p>{this.state.cityInputValue}</p>
+              </div>
+              <div className="flex-item">
+                <h2>Temperature (in Celsius):</h2>
+                <p>{this.state.tempData}</p>
+              </div>
+              <div className="flex-item">
+                <h2>Description:</h2>
+                <p>{this.state.description}</p>
+              </div>
+              <div className="flex-item">
+                <h2>Feels like:</h2>
+                <p>{this.state.feels_like}</p>
+              </div>
+              {/* <tr>
                 <th>City</th>
                 <th>Temperature</th>
                 <th></th>
@@ -88,7 +106,7 @@ class App extends React.Component {
                 <td></td>
                 <td>{this.state.description}</td>
 
-              </tr>
+              </tr> */}
 
               {/* <p>{this.state.cityInputValue}'s temperature is {this.state.tempData} degrees Celsius.</p>
 

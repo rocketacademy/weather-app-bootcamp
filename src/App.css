@@ -17,6 +17,10 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.app-title {
+  color: greenyellow;
+}
 .cityInputBox {
   height: 3rem;
   font-size: 1.5rem;
@@ -28,11 +32,18 @@
   font-size: 1.25rem;
 }
 
-.data-box {
-  border: 5px solid aquamarine;
-}
-.data-css {
-  font-size: 2rem;
+.container-flex {
   display: flex;
-  flex-direction: column;
+  background: aquamarine;
+  min-height: 10rem;
+  width: auto;
+  border-radius: 8px;
+}
+.flex-item {
+  color: blueviolet;
+  flex-basis: auto;
+
+  /* border: 1px solid red; */
+  margin: 5px;
+  padding: 5px;
 }

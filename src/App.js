@@ -61,23 +61,39 @@ class App extends React.Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p> */}
+          <h1>The Weather App</h1>
           <form onSubmit={this.handleSubmit}>
-            <label>Enter city:</label>
+            <label>Enter city: </label>
             <input
               type="text"
               onChange={this.handleChange}
               value={this.state.cityInputValue}
               placeholder="Enter city name"
+              className="cityInputBox"
             ></input>
-            <button type="submit">Submit</button>
+            <button type="submit" className="btn-submit">Submit</button>
           </form>
-
+          <br />
           {this.state.tempData ?
-            <div>
-              <p>{this.state.cityInputValue}'s temperature is {this.state.tempData} degrees Celsius.</p>
+            <div className="container">
+              <tr>
+                <th>City</th>
+                <th>Temperature</th>
+                <th></th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>{this.state.cityInputValue}</td>
+                <td>{this.state.tempData}</td>
+                <td></td>
+                <td>{this.state.description}</td>
+
+              </tr>
+
+              {/* <p>{this.state.cityInputValue}'s temperature is {this.state.tempData} degrees Celsius.</p>
 
               <p> The weather description is {this.state.description}.
-              </p>
+              </p> */}
             </div>
             : null}
         </header>

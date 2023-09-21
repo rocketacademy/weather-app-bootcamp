@@ -17,3 +17,13 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.cityInputBox {
+  height: 3rem;
+  font-size: 1.5rem;
+  border: 5px solid red;
+  border-radius: 0.5rem;
+}
+.btn-submit {
+  margin-left: 10px;
+  font-size: 1.25rem;
+}

@@ -75,7 +75,7 @@ class App extends React.Component {
           </form>
           <br />
           {this.state.tempData ?
-            <div className="container">
+            <div>
               <tr>
                 <th>City</th>
                 <th>Temperature</th>

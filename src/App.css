@@ -17,3 +17,33 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.app-title {
+  color: greenyellow;
+}
+.cityInputBox {
+  height: 3rem;
+  font-size: 1.5rem;
+  border: 5px solid red;
+  border-radius: 0.5rem;
+}
+.btn-submit {
+  margin-left: 10px;
+  font-size: 1.25rem;
+}
+
+.container-flex {
+  display: flex;
+  background: aquamarine;
+  min-height: 10rem;
+  width: auto;
+  border-radius: 8px;
+}
+.flex-item {
+  color: blueviolet;
+  flex-basis: auto;
+
+  /* border: 1px solid red; */
+  margin: 5px;
+  padding: 5px;
+}

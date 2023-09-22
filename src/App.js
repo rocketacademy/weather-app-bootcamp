@@ -63,7 +63,7 @@ class App extends React.Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p> */}
-          <h1 className="app-title">The Weather App</h1>
+          <h1 className="app-title">☀️ The Weather App ⛈️</h1>
           <form onSubmit={this.handleSubmit}>
             <label>Enter city: </label>
             <input

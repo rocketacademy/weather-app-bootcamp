@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.png";
 import "./App.css";
 import Weather from "./weather";
+import "react-vis/dist/style.css";
 
 function App() {
   return (

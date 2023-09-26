@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {
+  XYPlot,
+  LineSeries,
+  XAxis,
+  YAxis,
+  VerticalGridLines,
+  HorizontalGridLines,
+} from "react-vis";
 
 function Weather() {
   const [city, setCity] = useState("");
   const [weatherInfo, setWeatherInfo] = useState(null);
+  const [forecastInfo, setForecastInfo] = useState(null);
+
   const [error, setError] = useState(null);
+  // const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+  const apiKey = "22ec5fcdb5e52366469761c8e80a4ae4";
 
   const fetchGeo = (cityName) => {
     return axios
@@ -42,6 +54,21 @@ function Weather() {
       });
   };
 
+  const fetchForecast = (lat, lon) => {
+    return axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=40&appid=dcc39005b83b036266947a70c256ee38&units=metric`
+      )
+      .then((response) => {
+        console.log(response.data); // logging for debugging
+        return response.data;
+      })
+      .catch((err) => {
+        setError("Failed to fetch forecast data.");
+        return null;
+      });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchGeo(city).then((geoData) => {
@@ -55,6 +82,12 @@ function Weather() {
               lat: weatherData.coord.lat,
               lon: weatherData.coord.lon,
             });
+          }
+        });
+
+        fetchForecast(geoData.lat, geoData.lon).then((forecastData) => {
+          if (forecastData) {
+            setForecastInfo(forecastData.list); // Set the entire list to forecastInfo
           }
         });
       }
@@ -83,6 +116,43 @@ function Weather() {
           <p>
             Coordinates - Lat: {weatherInfo.lat} Lon: {weatherInfo.lon}
           </p>
+          {forecastInfo && (
+            <>
+              <div style={{ marginTop: "20px" }}>
+                <h3>Temperature Forecast</h3>
+                <XYPlot xType="time" width={600} height={300}>
+                  <VerticalGridLines />
+                  <HorizontalGridLines />
+                  <XAxis title="Time" />
+                  <YAxis title="Temperature (°C)" />
+                  <LineSeries
+                    data={forecastInfo.map((item) => ({
+                      x: item.dt * 1000,
+                      y: item.main.temp,
+                    }))}
+                  />
+                </XYPlot>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date & Time</th>
+                    <th>Temperature (°C)</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {forecastInfo.map((forecast, index) => (
+                    <tr key={index}>
+                      <td>{new Date(forecast.dt * 1000).toLocaleString()}</td>
+                      <td>{forecast.main.temp}</td>
+                      <td>{forecast.weather[0].main}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
+          )}
         </div>
       )}
     </div>

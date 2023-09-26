@@ -15,13 +15,12 @@ function Weather() {
   const [forecastInfo, setForecastInfo] = useState(null);
 
   const [error, setError] = useState(null);
-  // const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-  const apiKey = "22ec5fcdb5e52366469761c8e80a4ae4";
+  const apiKey = "3ccad83a1e47da6b2fac8e93b2b13d90";
 
   const fetchGeo = (cityName) => {
     return axios
       .get(
-        `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=dcc39005b83b036266947a70c256ee38`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`
       )
       .then((response) => {
         console.log(response.data); // logging for debugging
@@ -41,7 +40,7 @@ function Weather() {
   const fetchWeather = (lat, lon) => {
     return axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=dcc39005b83b036266947a70c256ee38&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
       )
       .then((response) => {
         console.log(response.data); // logging for debugging
@@ -57,7 +56,7 @@ function Weather() {
   const fetchForecast = (lat, lon) => {
     return axios
       .get(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=40&appid=dcc39005b83b036266947a70c256ee38&units=metric`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=40&appid=${apiKey}&units=metric`
       )
       .then((response) => {
         console.log(response.data); // logging for debugging

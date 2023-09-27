@@ -15,7 +15,7 @@ function Weather() {
   const [forecastInfo, setForecastInfo] = useState(null);
 
   const [error, setError] = useState(null);
-  const apiKey = "3ccad83a1e47da6b2fac8e93b2b13d90";
+  const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
   const fetchGeo = (cityName) => {
     return axios

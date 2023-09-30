@@ -10,7 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       cityName:'',
-      apiKey: '8ed6e9e102813aa79f7bb0c12371a6d7',
+      apiKey: process.env.REACT_APP_API_KEY, 
       weatherData:null,
       forecast:null,
     }

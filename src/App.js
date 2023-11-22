@@ -16,10 +16,11 @@ class App extends React.Component {
 
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=6a3affea0dc3f2287d470f99deb8e2f2`
+        `https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=metric&appid=6a3affea0dc3f2287d470f99deb8e2f2`
       )
 
       .then((response) => {
+        console.log(response);
         const weatherData = response.data["weather"];
         console.log(weatherData);
       });

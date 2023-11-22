@@ -1,8 +1,15 @@
 import { Grid, Box, Dialog, DialogTitle } from "@mui/material";
+import {
+  LineChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Line,
+  Tooltip,
+} from "recharts";
 
 export default function Forecast(props) {
   const { forecastData } = props;
-  console.log("city" in forecastData);
   if (!("city" in forecastData)) {
     return <div></div>;
   }
@@ -22,6 +29,25 @@ export default function Forecast(props) {
     );
   });
 
+  const graph = (
+    <LineChart
+      width={550}
+      height={250}
+      data={forecastData.list}
+      margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+    >
+      <CartesianGrid />
+      <XAxis dataKey="dt_txt" />
+      <Tooltip />
+      <YAxis
+        label={{ value: "Tempurature", angle: -90, position: "insideLeft" }}
+        unit="°C"
+        domain={["auto", "auto"]}
+      />
+      <Line type="monotone" dataKey="main.temp" stroke="#82ca9d" />
+    </LineChart>
+  );
+
   return (
     <Dialog
       open={"city" in forecastData !== undefined}
@@ -29,6 +55,7 @@ export default function Forecast(props) {
     >
       <DialogTitle>{forecastData.city.name}</DialogTitle>
       <Grid className="forecast-list">{display}</Grid>
+      {graph}
     </Dialog>
   );
 }

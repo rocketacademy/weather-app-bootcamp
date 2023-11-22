@@ -58,7 +58,6 @@ class App extends React.Component {
   };
 
   render() {
-    console.log(this.state.forecastData);
     return (
       <div className="App">
         <header className="App-header">

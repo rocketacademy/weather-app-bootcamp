@@ -7,7 +7,10 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      initialRender: true,
       city: "",
+      temperature: 0,
+      icon: "",
     };
   }
 
@@ -22,7 +25,20 @@ class App extends React.Component {
       .then((response) => {
         console.log(response);
         const weatherData = response.data["weather"];
-        console.log(weatherData);
+        const temperatureData = response.data["main"];
+        this.setState({
+          initialRender: false,
+          temperature: temperatureData["temp"],
+          icon: weatherData[0]["icon"],
+        });
+      });
+
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${this.state.city}&units=metric&appid=6a3affea0dc3f2287d470f99deb8e2f2`
+      )
+      .then((response) => {
+        console.log(response);
       });
   };
 
@@ -33,6 +49,7 @@ class App extends React.Component {
   };
 
   render() {
+    console.log();
     return (
       <div className="App">
         <header className="App-header">
@@ -51,6 +68,15 @@ class App extends React.Component {
                 Submit
               </button>
             </form>
+          </div>
+          <div>
+            {this.state.icon !== "" && (
+              <img
+                src={`https://openweathermap.org/img/wn/${this.state.icon}.png`}
+                alt="weathericon"
+              />
+            )}
+            {!this.state.initialRender && <h3>{this.state.temperature}°C</h3>}
           </div>
         </header>
       </div>

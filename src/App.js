@@ -31,7 +31,7 @@ class App extends React.Component {
     e.preventDefault();
     axios
       .get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${this.state.input}&appid=ff74b95fa5c1b30eacf349b5b558101a`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${this.state.input}&appid=ff74b95fa5c1b30eacf349b5b558101a`
       )
       .then((response) => response.data[0])
       .then((data) =>

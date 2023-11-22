@@ -7,8 +7,12 @@ import Forecast from "./Forecast";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { input: "", weatherData: [], forecastData: [] };
+    this.state = { input: "", weatherData: [], forecastData: {} };
   }
+
+  handleClose = () => {
+    this.setState({ forecastData: {} });
+  };
 
   handleShowForecast = (i) => {
     axios
@@ -16,7 +20,7 @@ class App extends React.Component {
         `https://api.openweathermap.org/data/2.5/forecast?lat=${this.state.weatherData[i].lat}&lon=${this.state.weatherData[i].lon}&units=metric&appid=ff74b95fa5c1b30eacf349b5b558101a`
       )
       .then((response) => response.data)
-      .then((data) => this.setState({ forecastData: [...data.list] }));
+      .then((data) => this.setState({ forecastData: data }));
   };
 
   handleChange = (e) => {
@@ -38,6 +42,7 @@ class App extends React.Component {
       .then((response) => response.data)
       .then((data) =>
         this.setState({
+          input: "",
           weatherData: [
             ...this.state.weatherData,
             {
@@ -53,10 +58,14 @@ class App extends React.Component {
   };
 
   render() {
+    console.log(this.state.forecastData);
     return (
       <div className="App">
         <header className="App-header">
-          <Forecast forecastData={this.state.forecastData} />
+          <Forecast
+            forecastData={this.state.forecastData}
+            handleClose={this.handleClose}
+          />
           <form onSubmit={this.handleSubmit}>
             <input
               type="input"

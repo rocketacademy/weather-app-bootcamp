@@ -17,3 +17,14 @@
   font-size: calc(10px + 2vmin);
   color: rgb(18, 17, 17);
 }
+
+.input-field {
+  min-width: 250px;
+  height: 30px;
+  font-size: 15px;
+  border: 0;
+}
+.button {
+  height: 35px;
+  min-width: 100px;
+}

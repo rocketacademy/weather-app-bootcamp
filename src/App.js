@@ -43,18 +43,20 @@ class App extends React.Component {
       <div className="App">
         <h1>Welcome to my weather app 🤠</h1>
         <p>
-          Please type in any city's name into the input field below to see what
-          the weather is like down there 😉
+          Please type in any city's name into the input field below and click
+          "submit" to get the weather info 😉
         </p>
 
         <form>
           <input
+            className="input-field"
             type="text"
             placeholder="enter the city name"
             value={this.state.input}
             onChange={this.handleChange}
           ></input>
           <input
+            className="button"
             type="submit"
             value="submit"
             onClick={this.handleSubmit}

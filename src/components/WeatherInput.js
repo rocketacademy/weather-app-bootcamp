@@ -29,7 +29,7 @@ class WeatherInput extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <p className="p-2 mb-1">Search the city you desire</p>
             <input
-              className="input input-bordered"
+              className="input input-bordered mr-3"
               type="text"
               value={this.state.inputValue}
               onChange={this.handleChange}
@@ -45,7 +45,7 @@ class WeatherInput extends React.Component {
               alt="weathericon"
             />
           )}
-          {!this.state.initialRender && <h3>{this.props.temperature}°C</h3>}
+          {!this.props.initialRender && <h3>{this.props.temperature}°C</h3>}
         </div>
       </>
     );

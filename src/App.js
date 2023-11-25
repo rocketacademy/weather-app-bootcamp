@@ -115,13 +115,15 @@ class App extends React.Component {
               <th>Sky Conditions</th>
             </tr>
           </thead>
-          {data.map((obj, rowIndex) => (
-            <tr key={rowIndex}>
-              <th className="bg-dark text-light py-2">{obj.dt_txt}</th>
-              <td className="border">{obj.main.temp}</td>
-              <td>{obj.weather[0].description}</td>
-            </tr>
-          ))}
+          <tbody>
+            {data.map((obj, rowIndex) => (
+              <tr key={rowIndex}>
+                <th className="bg-dark text-light py-2">{obj.dt_txt}</th>
+                <td className="border">{obj.main.temp}</td>
+                <td>{obj.weather[0].description}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     );

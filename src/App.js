@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import axios from "axios";
-const apiKey = "masked";
+const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
 class App extends React.Component {
   constructor() {

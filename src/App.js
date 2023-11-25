@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
 import axios from "axios";
-const apiKey = "6551f6311cfd170cad474dd24a9b6e05";
+const apiKey = "masked";
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { city: "", weather: [] };
+    this.state = { city: "", weather: [], forecast: [] };
   }
 
   getWeather = async () => {
@@ -22,12 +22,29 @@ class App extends React.Component {
     return true;
   };
 
+  getForecast = async () => {
+    await axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${this.state.city}&appid=${apiKey}`
+      )
+      .then((response) =>
+        this.setState({
+          forecast: [...this.state.forecast, response.data],
+        })
+      );
+    return true;
+  };
+
   handleChange = (e) => {
     this.setState({ city: `${e.target.value}` });
   };
 
-  handleSubmit = () => {
+  handleSubmitWeather = () => {
     this.getWeather(this.state.city);
+  };
+
+  handleSubmitForecast = () => {
+    this.getForecast(this.state.city);
   };
 
   render() {
@@ -49,7 +66,16 @@ class App extends React.Component {
           placeholder="City"
           onChange={(event) => this.handleChange(event)}
         />
-        <input type="submit" value="submit" onClick={this.handleSubmit} />
+        <input
+          type="submit"
+          value="Current Weather"
+          onClick={this.handleSubmitWeather}
+        />
+        <input
+          type="submit"
+          value="Forecast"
+          onClick={this.handleSubmitForecast}
+        />
         {this.state.weather && this.state.weather.length > 0
           ? weatherDisplay
           : null}

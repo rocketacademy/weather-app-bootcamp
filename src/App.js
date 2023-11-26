@@ -6,7 +6,8 @@ import { Forecast } from "./components/Forecast";
 
 const App = () => {
   const [cityName, setCityName] = useState("");
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isWeatherDataLoaded, setIsWeatherDataLoaded] = useState(false);
+
   const [weather, setWeather] = useState({
     city: "",
     weatherInfo: "",
@@ -35,10 +36,11 @@ const App = () => {
       });
     });
     setCityName("");
-    setIsDataLoaded(true);
+    setIsWeatherDataLoaded(true);
   };
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
     getForecast(weather.lat, weather.lon).then((forecastedData) => {
       setForecastedWeather(forecastedData);
     });
@@ -47,7 +49,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} name="weather-form">
           <input
             type="text"
             placeholder="Enter a city"
@@ -56,15 +58,14 @@ const App = () => {
           />
           <button type="submit">Get Weather</button>
         </form>
-        {isDataLoaded && (
+        {isWeatherDataLoaded && (
           <>
             <Weather weatherResult={weather} />
-            <button type="submit" onClick={handleClick}>
-              Get Hourly Forecast
-            </button>
-            <Forecast forecastedResult={forecastedWeather} />
+            <button onClick={handleClick}>Get Forecast</button>
           </>
         )}
+
+        {forecastedWeather && <Forecast forecastedResult={forecastedWeather} />}
       </header>
     </div>
   );

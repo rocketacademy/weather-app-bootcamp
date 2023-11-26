@@ -27,7 +27,7 @@ class WeatherInput extends React.Component {
       <>
         <div className="p-2 m-2">
           <form onSubmit={this.handleSubmit}>
-            <p className="p-2 mb-1">Search the city you desire</p>
+            <p className="p-2 mb-1 text-white">Search the city you desire</p>
             <input
               className="input input-bordered mr-3"
               type="text"
@@ -38,7 +38,7 @@ class WeatherInput extends React.Component {
             <button className="btn">Submit</button>
           </form>
         </div>
-        <div>
+        <div className="text-white">
           {this.props.icon !== "" && (
             <img
               src={`https://openweathermap.org/img/wn/${this.props.icon}.png`}

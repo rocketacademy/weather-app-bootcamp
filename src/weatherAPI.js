@@ -21,7 +21,7 @@ class WeatherAPI extends React.Component {
   fetchWeatherData = () => {
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${this.props.city}&units=metric&appid=6a3affea0dc3f2287d470f99deb8e2f2`
+        `https://api.openweathermap.org/data/2.5/weather?q=${this.props.city}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
       )
 
       .then((response) => {
@@ -33,7 +33,7 @@ class WeatherAPI extends React.Component {
 
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${this.props.city}&units=metric&appid=6a3affea0dc3f2287d470f99deb8e2f2`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${this.props.city}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
       )
       .then((response) => {
         console.log(response);
@@ -41,7 +41,6 @@ class WeatherAPI extends React.Component {
   };
 
   render() {
-    console.log("rendered weather API");
     return <></>;
   }
 }

@@ -1,31 +1,48 @@
 import React, { useState } from "react";
 import "./App.css";
-import { getWeather } from "./utils";
+import { getWeather, getForecast } from "./utils";
 import { Weather } from "./components/Weather";
+import { Forecast } from "./components/Forecast";
 
 const App = () => {
   const [cityName, setCityName] = useState("");
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [weather, setWeather] = useState({
     city: "",
     weatherInfo: "",
     temp: "",
-    feelsLike: "",
+    maxTemp: "",
+    minTemp: "",
     humidity: "",
+    lat: "",
+    lon: "",
   });
+  const [forecastedWeather, setForecastedWeather] = useState([]);
 
   const handleSubmit = (e) => {
+    if (cityName === "") return;
     e.preventDefault();
     getWeather(cityName).then((weatherData) => {
       setWeather({
         city: weatherData.name,
         weatherInfo: weatherData.weather[0],
         temp: weatherData.main.temp,
-        feelsLike: weatherData.main.feels_like,
+        maxTemp: weatherData.main.temp_max,
+        minTemp: weatherData.main.temp_min,
         humidity: weatherData.main.humidity,
+        lat: weatherData.coord.lat,
+        lon: weatherData.coord.lon,
       });
     });
+    setCityName("");
+    setIsDataLoaded(true);
   };
-  console.log(weather);
+
+  const handleClick = () => {
+    getForecast(weather.lat, weather.lon).then((forecastedData) => {
+      setForecastedWeather(forecastedData);
+    });
+  };
 
   return (
     <div className="App">
@@ -37,9 +54,17 @@ const App = () => {
             onChange={(e) => setCityName(e.target.value)}
             value={cityName}
           />
-          <button type="submit">Get weather</button>
+          <button type="submit">Get Weather</button>
         </form>
-        <Weather weatherResult={weather} />
+        {isDataLoaded && (
+          <>
+            <Weather weatherResult={weather} />
+            <button type="submit" onClick={handleClick}>
+              Get Hourly Forecast
+            </button>
+            <Forecast forecastedResult={forecastedWeather} />
+          </>
+        )}
       </header>
     </div>
   );

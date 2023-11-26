@@ -1,3 +1,4 @@
+import React from "react";
 import { Paper, Container, Typography } from "@mui/material";
 
 export const Weather = ({ weatherResult }) => {
@@ -27,8 +28,8 @@ export const Weather = ({ weatherResult }) => {
             alignItems: "center",
           }}
         >
-          <Typography variant="subtitle2">H: {maxTemp}°C</Typography>
           <Typography variant="subtitle2">L: {minTemp}°C</Typography>
+          <Typography variant="subtitle2">H: {maxTemp}°C</Typography>
         </div>
       </Paper>
     </Container>

@@ -32,7 +32,6 @@ class App extends React.Component {
       )
       .then((response) => {
         rawData = response.data[0];
-        console.log(rawData);
         return rawData;
       })
 

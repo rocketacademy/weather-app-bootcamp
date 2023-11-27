@@ -17,3 +17,11 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.timing {
+  font-size: 10px;
+}
+
+.temp {
+  font-size: 30px;
+}

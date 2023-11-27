@@ -20,14 +20,14 @@ class App extends React.Component {
     e.preventDefault();
     axios
       .get(
-        `https://api.openweathermap.org/geo/1.0/direct?q=${this.state.input}&limit=1&appid=eef9de0fc5fbc3bc3b3a376f4414d5f3`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${this.state.input}&limit=1&appid=${process.env.REACT_APP_API_KEY}`
       )
       // City geo data is in response.data[0]
       // Arrow functions with no curly braces return value after arrow
       .then((response) => response.data[0])
       .then((cityGeoData) =>
         axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&appid=eef9de0fc5fbc3bc3b3a376f4414d5f3&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&appid=${process.env.REACT_APP_API_KEY}&units=metric`
         )
       )
       .then((response) => {

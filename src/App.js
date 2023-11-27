@@ -14,6 +14,8 @@ class App extends React.Component {
       weatherInfo: "",
       weatherDesc: "",
       temperature: "",
+      hourlyForecast: [],
+      forecastTiming: [],
     };
   }
 
@@ -23,11 +25,17 @@ class App extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    let rawData = [];
     axios
       .get(
         `https://api.openweathermap.org/geo/1.0/direct?q=${this.state.formInput}&limit=1&appid=${OPEN_WEATHER_API_KEY}`
       )
-      .then((response) => response.data[0])
+      .then((response) => {
+        rawData = response.data[0];
+        console.log(rawData);
+        return rawData;
+      })
+
       .then((cityGeoData) =>
         axios.get(
           `https://api.openweathermap.org/data/2.5/weather?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&appid=${OPEN_WEATHER_API_KEY}&units=metric`
@@ -40,6 +48,22 @@ class App extends React.Component {
           weatherDesc: response.data.weather[0].description,
           temperature: response.data.main.temp,
           formInput: "",
+        });
+        return rawData;
+      })
+      .then((cityForecastData) =>
+        axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${cityForecastData.lat}&lon=${cityForecastData.lon}&appid=${OPEN_WEATHER_API_KEY}&units=metric`
+        )
+      )
+      .then((response) => {
+        const forecast3Timings = response.data.list.slice(0, 3);
+
+        const temp = forecast3Timings.map((item) => item.main.temp);
+        const timing = forecast3Timings.map((item) => item.dt_txt);
+        this.setState({
+          hourlyForecast: temp,
+          forecastTiming: timing,
         });
       });
   };
@@ -58,10 +82,25 @@ class App extends React.Component {
           </form>
           {this.state.city !== "" && <p>City: {this.state.city}</p>}
           {this.state.temperature !== "" && (
-            <p>Temperature: {this.state.temperature} celcius</p>
+            <p>Temperature: {this.state.temperature} °C</p>
           )}
-          <p>{this.state.weatherInfo}</p>
-          <p>{this.state.weatherDesc}</p>
+          <p>
+            {this.state.weatherInfo}-{this.state.weatherDesc}
+          </p>
+          <table>
+            <thead>
+              <tr className="timing">
+                {this.state.forecastTiming.map((timing, index) => (
+                  <th key={index}>{timing}</th>
+                ))}
+              </tr>
+              <tr className="temp">
+                {this.state.hourlyForecast.map((temp, index) => (
+                  <th key={index}>{temp}°C</th>
+                ))}
+              </tr>
+            </thead>
+          </table>
         </header>
       </div>
     );

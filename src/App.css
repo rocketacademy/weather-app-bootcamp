@@ -17,3 +17,30 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+h5 {
+  border: 1px solid white;
+  margin: 5px;
+}
+h6 {
+  margin: 5px;
+}
+img {
+  height: 50px;
+}
+
+.forecast-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.forecast-div {
+  height: 150px;
+  width: 150px;
+  border: 1px solid white;
+}
+.forecast-div img {
+  height: 30px;
+  width: 30px;
+}

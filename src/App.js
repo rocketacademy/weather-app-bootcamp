@@ -3,6 +3,7 @@ import "./App.css";
 import axios from "axios";
 import WeatherData from "./WeatherData";
 import Forecast from "./Forecast";
+const APPID = process.env.REACT_APP_APPID;
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class App extends React.Component {
   handleShowForecast = (i) => {
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${this.state.weatherData[i].lat}&lon=${this.state.weatherData[i].lon}&units=metric&appid=ff74b95fa5c1b30eacf349b5b558101a`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${this.state.weatherData[i].lat}&lon=${this.state.weatherData[i].lon}&units=metric&appid=${APPID}`
       )
       .then((response) => response.data)
       .then((data) => this.setState({ forecastData: data }));
@@ -31,12 +32,12 @@ class App extends React.Component {
     e.preventDefault();
     axios
       .get(
-        `https://api.openweathermap.org/geo/1.0/direct?q=${this.state.input}&appid=ff74b95fa5c1b30eacf349b5b558101a`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${this.state.input}&appid=${APPID}`
       )
       .then((response) => response.data[0])
       .then((data) =>
         axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${data.lat}&lon=${data.lon}&units=metric&appid=ff74b95fa5c1b30eacf349b5b558101a`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${data.lat}&lon=${data.lon}&units=metric&appid=${APPID}`
         )
       )
       .then((response) => response.data)
